@@ -1,0 +1,953 @@
+CREATE schema cheforacle;
+
+create table cheforacle.user_profile(uname varchar(20) primary key,upass varchar(20),utype varchar(20) not null,fpref varchar(20),cpref varchar(20));
+
+ insert into cheforacle.user_profile (uname,upass,utype,fpref,cpref) values ('pranati','123456', 'reg', 'vegan', 'beginner');
+
+insert into cheforacle.user_profile (uname,upass,utype,fpref,cpref) values ('vaibhavi',' 123456', 'reg','vegetarian','expert');
+
+create table cheforacle.ingredients(iid SERIAL primary key,inname varchar(128) unique,intype varchar(20));
+
+
+
+insert into cheforacle.ingredients(inname,intype)values ('Broccoli' , 'veg');
+ insert into cheforacle.ingredients(inname,intype)values ('Mushroom' , 'veg');
+insert into cheforacle.ingredients(inname,intype)values ('Tomato' , 'veg');
+ insert into cheforacle.ingredients(inname,intype)values ('Onion' , 'veg');
+insert into cheforacle.ingredients(inname,intype) values ('Apple' , 'veg');
+
+
+ insert into cheforacle.ingredients(inname,intype)values ('Chicken' , 'meat');
+insert into cheforacle.ingredients(inname,intype)values ('Sausages' , 'meat');
+insert into cheforacle.ingredients(inname,intype)values ('Beef' , 'meat');
+ insert into cheforacle.ingredients(inname,intype)values ('Pork' , 'meat');
+insert into cheforacle.ingredients(inname,intype) values ('Tuna' , 'meat');
+
+
+ insert into cheforacle.ingredients(inname,intype)values ('Italian Bread' , 'carb');
+insert into cheforacle.ingredients(inname,intype)values ('Swiss Cheese' , 'carb');
+insert into cheforacle.ingredients(inname,intype)values ('Rice' , 'carb');
+ insert into cheforacle.ingredients(inname,intype)values ('Brown Rice' , 'carb');
+insert into cheforacle.ingredients(inname,intype) values ('Penne Pasta' , 'carb');
+
+
+ insert into cheforacle.ingredients(inname,intype)values ('Soy sauce' , 'sauces');
+insert into cheforacle.ingredients(inname,intype)values ('Red wine' , 'sauces');
+insert into cheforacle.ingredients(inname,intype)values ('Garlic sauce' , 'sauces');
+ insert into cheforacle.ingredients(inname,intype)values ('Mayonnaise' , 'sauces');
+insert into cheforacle.ingredients(inname,intype) values ('Barbeque' , 'sauces');
+insert into cheforacle.ingredients(inname,intype) values ('Milk' , 'sauces');
+
+
+
+create table cheforacle.cusine(cid SERIAL primary key,cname varchar(128),ctype varchar(128),coname varchar(128)not null);
+
+
+
+insert into cheforacle.cusine (cname, ctype, coname) values ('Indian','Oriental','India');
+
+insert into cheforacle.cusine (cname, ctype, coname) values ('German','Continental','Germany');
+
+insert into cheforacle.cusine (cname, ctype, coname) values ('Chinese','Oriental','China');
+
+insert into cheforacle.cusine (cname, ctype, coname) values ('Thai','Oriental','Thailand');
+
+insert into cheforacle.cusine (cname, ctype, coname) values ('American','Continental','America');
+
+insert into cheforacle.cusine (cname, ctype, coname) values ('French','Continental','France');
+
+
+
+
+create table cheforacle.meal(mid SERIAL primary key,mtype varchar(128));
+
+
+
+insert into cheforacle.meal (mtype) values ('Meal');
+insert into cheforacle.meal (mtype) values ('Drinks and Soups');
+insert into cheforacle.meal (mtype) values ('Desserts');
+insert into cheforacle.meal (mtype) values ('Snacks');
+
+
+
+create table cheforacle.dish(did SERIAL primary key,dname varchar(128) not null,ddirections varchar(5000) not null,iid integer not null,foreign key(iid) references cheforacle.ingredients(iid),cid integer not null,foreign key(cid) references cheforacle.cusine(cid),calorie integer not null ,mid integer not null,foreign key(mid) references cheforacle.meal(mid),fpref varchar(128) not null,cpref varchar(128) not null);
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Broccoli and swiss cheese quiche','Calories: 400
+1 lb. broccoli
+1 med. yellow onion, peeled & sliced
+2 tbsp. butter
+1 Quiche Crust (recipe follows)
+4 eggs, beaten
+3/4 c. cream
+1 1/4 c. milk
+Salt & pepper to taste
+1/2 lb. Swiss cheese, grated into coarse pieces
+
+Clean the broccoli and cut into flowerets. Saute the onion and broccoli in butter until tender but not soft. Place the vegetables in the bottom of the quiche crust. Mix the eggs, cream, milk, salt and pepper. Fill the shell and top with the Swiss cheese. Bake at 375 degrees for 30 to 40 minutes or until a knife inserted in the center of the quiche comes out dry. Cool for 10 minutes before cutting. Can be served at room temperature.
+
+QUICHE CRUST:
+
+2 c. flour
+2 tsp. baking powder
+Salt (opt.)
+1/2 c. vegetable oil
+1/4 c. milk
+
+Mix the flour and the baking powder together. Add salt if desired. Mix the oil and milk together and then pour into the flour. Stir only until mixed. The mixture will be rather coarse and granular, but it will roll out well. Do not over-mix. Mold into 2 balls and wrap in plastic. Allow to sit for 15 minutes. Each ball will make 1 (9 inch) pie crust.
+If you are using a larger French quiche pan, then use a bit more of the dough. Roll out between two sheets of waxed paper. Place the pastry in the quiche pan or pie plate and prick the bottom with a kitchen fork. Line the inside with waxed paper or aluminum foil. Put two cups of dry beans into the pie crust and bake at 400 degrees for 12 minutes. Save the beans for the next pie crust you make. The shell is now ready for filling and baking. Makes 2 (9 inch) pie crusts or 1 larger crust.
+',1,2,400,1,'eggitarian','intermediate');
+
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Broccoli and swiss cheese quiche','Calories: 400
+1 lb. broccoli
+1 med. yellow onion, peeled & sliced
+2 tbsp. butter
+1 Quiche Crust (recipe follows)
+4 eggs, beaten
+3/4 c. cream
+1 1/4 c. milk
+Salt & pepper to taste
+1/2 lb. Swiss cheese, grated into coarse pieces
+
+Clean the broccoli and cut into flowerets. Saute the onion and broccoli in butter until tender but not soft. Place the vegetables in the bottom of the quiche crust. Mix the eggs, cream, milk, salt and pepper. Fill the shell and top with the Swiss cheese. Bake at 375 degrees for 30 to 40 minutes or until a knife inserted in the center of the quiche comes out dry. Cool for 10 minutes before cutting. Can be served at room temperature.
+
+QUICHE CRUST:
+
+2 c. flour
+2 tsp. baking powder
+Salt (opt.)
+1/2 c. vegetable oil
+1/4 c. milk
+
+Mix the flour and the baking powder together. Add salt if desired. Mix the oil and milk together and then pour into the flour. Stir only until mixed. The mixture will be rather coarse and granular, but it will roll out well. Do not over-mix. Mold into 2 balls and wrap in plastic. Allow to sit for 15 minutes. Each ball will make 1 (9 inch) pie crust.
+If you are using a larger French quiche pan, then use a bit more of the dough. Roll out between two sheets of waxed paper. Place the pastry in the quiche pan or pie plate and prick the bottom with a kitchen fork. Line the inside with waxed paper or aluminum foil. Put two cups of dry beans into the pie crust and bake at 400 degrees for 12 minutes. Save the beans for the next pie crust you make. The shell is now ready for filling and baking. Makes 2 (9 inch) pie crusts or 1 larger crust.
+',11,2,400,1,'eggitarian','intermediate');
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Broccoli and swiss cheese quiche','Calories: 400
+1 lb. broccoli
+1 med. yellow onion, peeled & sliced
+2 tbsp. butter
+1 Quiche Crust (recipe follows)
+4 eggs, beaten
+3/4 c. cream
+1 1/4 c. milk
+Salt & pepper to taste
+1/2 lb. Swiss cheese, grated into coarse pieces
+
+Clean the broccoli and cut into flowerets. Saute the onion and broccoli in butter until tender but not soft. Place the vegetables in the bottom of the quiche crust. Mix the eggs, cream, milk, salt and pepper. Fill the shell and top with the Swiss cheese. Bake at 375 degrees for 30 to 40 minutes or until a knife inserted in the center of the quiche comes out dry. Cool for 10 minutes before cutting. Can be served at room temperature.
+
+QUICHE CRUST:
+
+2 c. flour
+2 tsp. baking powder
+Salt (opt.)
+1/2 c. vegetable oil
+1/4 c. milk
+
+Mix the flour and the baking powder together. Add salt if desired. Mix the oil and milk together and then pour into the flour. Stir only until mixed. The mixture will be rather coarse and granular, but it will roll out well. Do not over-mix. Mold into 2 balls and wrap in plastic. Allow to sit for 15 minutes. Each ball will make 1 (9 inch) pie crust.
+If you are using a larger French quiche pan, then use a bit more of the dough. Roll out between two sheets of waxed paper. Place the pastry in the quiche pan or pie plate and prick the bottom with a kitchen fork. Line the inside with waxed paper or aluminum foil. Put two cups of dry beans into the pie crust and bake at 400 degrees for 12 minutes. Save the beans for the next pie crust you make. The shell is now ready for filling and baking. Makes 2 (9 inch) pie crusts or 1 larger crust.
+',12,2,400,1,'eggitarian','intermediate');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Broccoli and swiss cheese quiche','Calories: 400
+1 lb. broccoli
+1 med. yellow onion, peeled & sliced
+2 tbsp. butter
+1 Quiche Crust (recipe follows)
+4 eggs, beaten
+3/4 c. cream
+1 1/4 c. milk
+Salt & pepper to taste
+1/2 lb. Swiss cheese, grated into coarse pieces
+
+Clean the broccoli and cut into flowerets. Saute the onion and broccoli in butter until tender but not soft. Place the vegetables in the bottom of the quiche crust. Mix the eggs, cream, milk, salt and pepper. Fill the shell and top with the Swiss cheese. Bake at 375 degrees for 30 to 40 minutes or until a knife inserted in the center of the quiche comes out dry. Cool for 10 minutes before cutting. Can be served at room temperature.
+
+QUICHE CRUST:
+
+2 c. flour
+2 tsp. baking powder
+Salt (opt.)
+1/2 c. vegetable oil
+1/4 c. milk
+
+Mix the flour and the baking powder together. Add salt if desired. Mix the oil and milk together and then pour into the flour. Stir only until mixed. The mixture will be rather coarse and granular, but it will roll out well. Do not over-mix. Mold into 2 balls and wrap in plastic. Allow to sit for 15 minutes. Each ball will make 1 (9 inch) pie crust.
+If you are using a larger French quiche pan, then use a bit more of the dough. Roll out between two sheets of waxed paper. Place the pastry in the quiche pan or pie plate and prick the bottom with a kitchen fork. Line the inside with waxed paper or aluminum foil. Put two cups of dry beans into the pie crust and bake at 400 degrees for 12 minutes. Save the beans for the next pie crust you make. The shell is now ready for filling and baking. Makes 2 (9 inch) pie crusts or 1 larger crust.
+',21,2,400,1,'eggitarian','intermediate');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Broccoli and swiss cheese quiche','Calories: 400
+1 lb. broccoli
+1 med. yellow onion, peeled & sliced
+2 tbsp. butter
+1 Quiche Crust (recipe follows)
+4 eggs, beaten
+3/4 c. cream
+1 1/4 c. milk
+Salt & pepper to taste
+1/2 lb. Swiss cheese, grated into coarse pieces
+
+Clean the broccoli and cut into flowerets. Saute the onion and broccoli in butter until tender but not soft. Place the vegetables in the bottom of the quiche crust. Mix the eggs, cream, milk, salt and pepper. Fill the shell and top with the Swiss cheese. Bake at 375 degrees for 30 to 40 minutes or until a knife inserted in the center of the quiche comes out dry. Cool for 10 minutes before cutting. Can be served at room temperature.
+
+QUICHE CRUST:
+
+2 c. flour
+2 tsp. baking powder
+Salt (opt.)
+1/2 c. vegetable oil
+1/4 c. milk
+
+Mix the flour and the baking powder together. Add salt if desired. Mix the oil and milk together and then pour into the flour. Stir only until mixed. The mixture will be rather coarse and granular, but it will roll out well. Do not over-mix. Mold into 2 balls and wrap in plastic. Allow to sit for 15 minutes. Each ball will make 1 (9 inch) pie crust.
+If you are using a larger French quiche pan, then use a bit more of the dough. Roll out between two sheets of waxed paper. Place the pastry in the quiche pan or pie plate and prick the bottom with a kitchen fork. Line the inside with waxed paper or aluminum foil. Put two cups of dry beans into the pie crust and bake at 400 degrees for 12 minutes. Save the beans for the next pie crust you make. The shell is now ready for filling and baking. Makes 2 (9 inch) pie crusts or 1 larger crust.
+',4,2,400,1,'eggitarian','intermediate');
+
+
+
+
+
+
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Broccoli and swiss cheese quiche','Calories: 400
+1 lb. broccoli
+1 med. yellow onion, peeled & sliced
+2 tbsp. butter
+1 Quiche Crust (recipe follows)
+4 eggs, beaten
+3/4 c. cream
+1 1/4 c. milk
+Salt & pepper to taste
+1/2 lb. Swiss cheese, grated into coarse pieces
+
+Clean the broccoli and cut into flowerets. Saute the onion and broccoli in butter until tender but not soft. Place the vegetables in the bottom of the quiche crust. Mix the eggs, cream, milk, salt and pepper. Fill the shell and top with the Swiss cheese. Bake at 375 degrees for 30 to 40 minutes or until a knife inserted in the center of the quiche comes out dry. Cool for 10 minutes before cutting. Can be served at room temperature.
+
+QUICHE CRUST:
+
+2 c. flour
+2 tsp. baking powder
+Salt (opt.)
+1/2 c. vegetable oil
+1/4 c. milk
+
+Mix the flour and the baking powder together. Add salt if desired. Mix the oil and milk together and then pour into the flour. Stir only until mixed. The mixture will be rather coarse and granular, but it will roll out well. Do not over-mix. Mold into 2 balls and wrap in plastic. Allow to sit for 15 minutes. Each ball will make 1 (9 inch) pie crust.
+If you are using a larger French quiche pan, then use a bit more of the dough. Roll out between two sheets of waxed paper. Place the pastry in the quiche pan or pie plate and prick the bottom with a kitchen fork. Line the inside with waxed paper or aluminum foil. Put two cups of dry beans into the pie crust and bake at 400 degrees for 12 minutes. Save the beans for the next pie crust you make. The shell is now ready for filling and baking. Makes 2 (9 inch) pie crusts or 1 larger crust.
+',21,2,400,1,'eggitarian','intermediate');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chicken Tikka Masala','Calories: 600
+Serves 4 to 6
+
+1 to 1 1/2 pounds boneless, skinless chicken thighs
+1 large onion, diced
+3 cloves garlic, minced
+1-inch piece whole ginger, peeled and grated
+2 tablespoons tomato paste
+1 to 2 tablespoons garam masala
+2 teaspoons paprika
+2 teaspoons kosher salt
+1 (28-ounce) can diced tomatoes
+3/4 cup heavy cream or coconut milk
+Fresh cilantro, chopped
+2 cups cooked rice, to serve
+Cut the chicken thighs into bite-sized pieces and transfer them to a 3-quart or larger slow cooker. Stir in the onion, garlic, ginger, tomato paste, 1 tablespoon of garam masala, paprika, and kosher salt until the chicken is evenly covered with spices. Stir in the diced tomatoes with their juices.
+? If you have the time: Marinate the chicken in 1/2 cup yogurt for up to 6 hours. Shake to remove excess yogurt before transferring to the slow cooker.
+? If you have the time: Sauté the onions and garlic in a little olive oil over medium-high heat in a skillet until softened, then stir in the ginger, tomato paste, and spices until fragrant. Transfer to the slow cooker with the chicken and diced tomatoes. This will give your tikka masala more depth of flavor.
+Cover the slow cooker and cook for 4 hours on high or 8 hours on low. Fifteen minutes before the end of cooking, stir in the heavy cream. If you prefer a thicker sauce, leave the slow cooker uncovered for the last 15 minutes. Taste and add more garam masala or salt to taste.
+Serve over rice with fresh cilantro sprinkled over the top of each serving. The tikka masala can be refrigerated for 3 to 4 days or frozen for 3 to 4 months.
+',4,1,600,1,'non-vegetarian','beginner');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chicken Tikka Masala','Calories: 600
+Serves 4 to 6
+
+1 to 1 1/2 pounds boneless, skinless chicken thighs
+1 large onion, diced
+3 cloves garlic, minced
+1-inch piece whole ginger, peeled and grated
+2 tablespoons tomato paste
+1 to 2 tablespoons garam masala
+2 teaspoons paprika
+2 teaspoons kosher salt
+1 (28-ounce) can diced tomatoes
+3/4 cup heavy cream or coconut milk
+Fresh cilantro, chopped
+2 cups cooked rice, to serve
+Cut the chicken thighs into bite-sized pieces and transfer them to a 3-quart or larger slow cooker. Stir in the onion, garlic, ginger, tomato paste, 1 tablespoon of garam masala, paprika, and kosher salt until the chicken is evenly covered with spices. Stir in the diced tomatoes with their juices.
+? If you have the time: Marinate the chicken in 1/2 cup yogurt for up to 6 hours. Shake to remove excess yogurt before transferring to the slow cooker.
+? If you have the time: Sauté the onions and garlic in a little olive oil over medium-high heat in a skillet until softened, then stir in the ginger, tomato paste, and spices until fragrant. Transfer to the slow cooker with the chicken and diced tomatoes. This will give your tikka masala more depth of flavor.
+Cover the slow cooker and cook for 4 hours on high or 8 hours on low. Fifteen minutes before the end of cooking, stir in the heavy cream. If you prefer a thicker sauce, leave the slow cooker uncovered for the last 15 minutes. Taste and add more garam masala or salt to taste.
+Serve over rice with fresh cilantro sprinkled over the top of each serving. The tikka masala can be refrigerated for 3 to 4 days or frozen for 3 to 4 months.
+',3,1,600,1,'non-vegetarian','beginner');
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chicken Tikka Masala','Calories: 600
+Serves 4 to 6
+
+1 to 1 1/2 pounds boneless, skinless chicken thighs
+1 large onion, diced
+3 cloves garlic, minced
+1-inch piece whole ginger, peeled and grated
+2 tablespoons tomato paste
+1 to 2 tablespoons garam masala
+2 teaspoons paprika
+2 teaspoons kosher salt
+1 (28-ounce) can diced tomatoes
+3/4 cup heavy cream or coconut milk
+Fresh cilantro, chopped
+2 cups cooked rice, to serve
+Cut the chicken thighs into bite-sized pieces and transfer them to a 3-quart or larger slow cooker. Stir in the onion, garlic, ginger, tomato paste, 1 tablespoon of garam masala, paprika, and kosher salt until the chicken is evenly covered with spices. Stir in the diced tomatoes with their juices.
+? If you have the time: Marinate the chicken in 1/2 cup yogurt for up to 6 hours. Shake to remove excess yogurt before transferring to the slow cooker.
+? If you have the time: Sauté the onions and garlic in a little olive oil over medium-high heat in a skillet until softened, then stir in the ginger, tomato paste, and spices until fragrant. Transfer to the slow cooker with the chicken and diced tomatoes. This will give your tikka masala more depth of flavor.
+Cover the slow cooker and cook for 4 hours on high or 8 hours on low. Fifteen minutes before the end of cooking, stir in the heavy cream. If you prefer a thicker sauce, leave the slow cooker uncovered for the last 15 minutes. Taste and add more garam masala or salt to taste.
+Serve over rice with fresh cilantro sprinkled over the top of each serving. The tikka masala can be refrigerated for 3 to 4 days or frozen for 3 to 4 months.
+',6,1,600,1,'non-vegetarian','beginner');
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chicken Tikka Masala','Calories: 600
+Serves 4 to 6
+
+1 to 1 1/2 pounds boneless, skinless chicken thighs
+1 large onion, diced
+3 cloves garlic, minced
+1-inch piece whole ginger, peeled and grated
+2 tablespoons tomato paste
+1 to 2 tablespoons garam masala
+2 teaspoons paprika
+2 teaspoons kosher salt
+1 (28-ounce) can diced tomatoes
+3/4 cup heavy cream or coconut milk
+Fresh cilantro, chopped
+2 cups cooked rice, to serve
+Cut the chicken thighs into bite-sized pieces and transfer them to a 3-quart or larger slow cooker. Stir in the onion, garlic, ginger, tomato paste, 1 tablespoon of garam masala, paprika, and kosher salt until the chicken is evenly covered with spices. Stir in the diced tomatoes with their juices.
+? If you have the time: Marinate the chicken in 1/2 cup yogurt for up to 6 hours. Shake to remove excess yogurt before transferring to the slow cooker.
+? If you have the time: Sauté the onions and garlic in a little olive oil over medium-high heat in a skillet until softened, then stir in the ginger, tomato paste, and spices until fragrant. Transfer to the slow cooker with the chicken and diced tomatoes. This will give your tikka masala more depth of flavor.
+Cover the slow cooker and cook for 4 hours on high or 8 hours on low. Fifteen minutes before the end of cooking, stir in the heavy cream. If you prefer a thicker sauce, leave the slow cooker uncovered for the last 15 minutes. Taste and add more garam masala or salt to taste.
+Serve over rice with fresh cilantro sprinkled over the top of each serving. The tikka masala can be refrigerated for 3 to 4 days or frozen for 3 to 4 months.
+',18,1,600,1,'non-vegetarian','beginner');
+
+
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Three Mushroom Tagliatelle with garlic sauce','Calories: 300
+INGREDIENTS
+	•	75 g tagliatelle, dry
+	•	3/8 cup shiitake mushrooms
+	•	3/8 cup baby button mushrooms
+	•	3/8 cup chestnut mushrooms
+	•	1 tsp vegan margarine
+FOR THE SAUCE
+	•	1 tbsp flour/corn flour
+	•	1 tbsp vegan margarine
+	•	1 cup nondairy milk (I used rice milk)
+	•	1 fat garlic clove, crushed
+	•	a few tablespoons of the pasta cooking water
+	•	salt and pepper
+PREPARATION
+	1	Cook the pasta according to package instructions. Chop and slice the mushrooms.
+	2	Melt the margarine over medium heat. When the pan is hot, cook the mushrooms for a few minutes until they have slightly shrunk and browned on all sides. Set aside.
+	3	For the sauce, melt the margarine in a small saucepan, then add the (corn)flour to make a roux. Add the garlic. Gradually pour in the non-dairy milk and a few tablespoons of the pasta cooking water and whisk vigorously to combine all the ingredients. When the sauce starts to boil, lower the heat and keep whisking until the sauce starts to thicken, then take it off the heat.
+	4	Mix the sauce and the mushrooms in the tagliatelle. Serve immediately and enjoy.
+
+',2,1,300,1,'vegan','beginner');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Three Mushroom Tagliatelle with garlic sauce','Calories: 300
+INGREDIENTS
+	•	75 g tagliatelle, dry
+	•	3/8 cup shiitake mushrooms
+	•	3/8 cup baby button mushrooms
+	•	3/8 cup chestnut mushrooms
+	•	1 tsp vegan margarine
+FOR THE SAUCE
+	•	1 tbsp flour/corn flour
+	•	1 tbsp vegan margarine
+	•	1 cup nondairy milk (I used rice milk)
+	•	1 fat garlic clove, crushed
+	•	a few tablespoons of the pasta cooking water
+	•	salt and pepper
+PREPARATION
+	1	Cook the pasta according to package instructions. Chop and slice the mushrooms.
+	2	Melt the margarine over medium heat. When the pan is hot, cook the mushrooms for a few minutes until they have slightly shrunk and browned on all sides. Set aside.
+	3	For the sauce, melt the margarine in a small saucepan, then add the (corn)flour to make a roux. Add the garlic. Gradually pour in the non-dairy milk and a few tablespoons of the pasta cooking water and whisk vigorously to combine all the ingredients. When the sauce starts to boil, lower the heat and keep whisking until the sauce starts to thicken, then take it off the heat.
+	4	Mix the sauce and the mushrooms in the tagliatelle. Serve immediately and enjoy.
+
+',15,1,300,1,'vegan','beginner');
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Three Mushroom Tagliatelle with garlic sauce','Calories: 300
+INGREDIENTS
+	•	75 g tagliatelle, dry
+	•	3/8 cup shiitake mushrooms
+	•	3/8 cup baby button mushrooms
+	•	3/8 cup chestnut mushrooms
+	•	1 tsp vegan margarine
+FOR THE SAUCE
+	•	1 tbsp flour/corn flour
+	•	1 tbsp vegan margarine
+	•	1 cup nondairy milk (I used rice milk)
+	•	1 fat garlic clove, crushed
+	•	a few tablespoons of the pasta cooking water
+	•	salt and pepper
+PREPARATION
+	1	Cook the pasta according to package instructions. Chop and slice the mushrooms.
+	2	Melt the margarine over medium heat. When the pan is hot, cook the mushrooms for a few minutes until they have slightly shrunk and browned on all sides. Set aside.
+	3	For the sauce, melt the margarine in a small saucepan, then add the (corn)flour to make a roux. Add the garlic. Gradually pour in the non-dairy milk and a few tablespoons of the pasta cooking water and whisk vigorously to combine all the ingredients. When the sauce starts to boil, lower the heat and keep whisking until the sauce starts to thicken, then take it off the heat.
+	4	Mix the sauce and the mushrooms in the tagliatelle. Serve immediately and enjoy.
+
+',18,1,300,1,'vegan','beginner');
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Three Mushroom Tagliatelle with garlic sauce','Calories: 300
+INGREDIENTS
+	•	75 g tagliatelle, dry
+	•	3/8 cup shiitake mushrooms
+	•	3/8 cup baby button mushrooms
+	•	3/8 cup chestnut mushrooms
+	•	1 tsp vegan margarine
+FOR THE SAUCE
+	•	1 tbsp flour/corn flour
+	•	1 tbsp vegan margarine
+	•	1 cup nondairy milk (I used rice milk)
+	•	1 fat garlic clove, crushed
+	•	a few tablespoons of the pasta cooking water
+	•	salt and pepper
+PREPARATION
+	1	Cook the pasta according to package instructions. Chop and slice the mushrooms.
+	2	Melt the margarine over medium heat. When the pan is hot, cook the mushrooms for a few minutes until they have slightly shrunk and browned on all sides. Set aside.
+	3	For the sauce, melt the margarine in a small saucepan, then add the (corn)flour to make a roux. Add the garlic. Gradually pour in the non-dairy milk and a few tablespoons of the pasta cooking water and whisk vigorously to combine all the ingredients. When the sauce starts to boil, lower the heat and keep whisking until the sauce starts to thicken, then take it off the heat.
+	4	Mix the sauce and the mushrooms in the tagliatelle. Serve immediately and enjoy.
+
+',15,1,300,1,'vegan','beginner');
+
+
+
+
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Apple Smoothie','Calories: 200
+
+INGREDIENTS:
+Apple
+Milk
+Almond
+yogurt ,honey.
+cinnamon
+Directions:
+	1	Peel and cut apple into halves. Remove the core and cut apple into large pieces.
+	2	Add apple and almonds in a blender jar.
+	3	Add milk, yogurt and honey.
+	4	Blend until smooth and there are no chunks of fruit. Pour prepared smoothie into a chilled serving glass and sprinkle cinnamon over it.
+
+
+',5,5,200,2,'vegetarian','beginner');
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Apple Smoothie','Calories: 200
+
+INGREDIENTS:
+Apple
+Milk
+Almond
+yogurt ,honey.
+cinnamon
+Directions:
+	1	Peel and cut apple into halves. Remove the core and cut apple into large pieces.
+	2	Add apple and almonds in a blender jar.
+	3	Add milk, yogurt and honey.
+	4	Blend until smooth and there are no chunks of fruit. Pour prepared smoothie into a chilled serving glass and sprinkle cinnamon over it.
+
+
+',21,5,200,2,'vegetarian','beginner');
+
+
+
+
+
+
+
+
+
+dname,ddirections,iid,cid,calorie,mid,fpref,cpref
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Three Mushroom Tagliatelle with garlic sauce','Calories: 300
+INGREDIENTS
+	•	75 g tagliatelle, dry
+	•	3/8 cup shiitake mushrooms
+	•	3/8 cup baby button mushrooms
+	•	3/8 cup chestnut mushrooms
+	•	1 tsp vegan margarine
+FOR THE SAUCE
+	•	1 tbsp flour/corn flour
+	•	1 tbsp vegan margarine
+	•	1 cup nondairy milk (I used rice milk)
+	•	1 fat garlic clove, crushed
+	•	a few tablespoons of the pasta cooking water
+	•	salt and pepper
+PREPARATION
+	1	Cook the pasta according to package instructions. Chop and slice the mushrooms.
+	2	Melt the margarine over medium heat. When the pan is hot, cook the mushrooms for a few minutes until they have slightly shrunk and browned on all sides. Set aside.
+	3	For the sauce, melt the margarine in a small saucepan, then add the (corn)flour to make a roux. Add the garlic. Gradually pour in the non-dairy milk and a few tablespoons of the pasta cooking water and whisk vigorously to combine all the ingredients. When the sauce starts to boil, lower the heat and keep whisking until the sauce starts to thicken, then take it off the heat.
+	4	Mix the sauce and the mushrooms in the tagliatelle. Serve immediately and enjoy.
+
+',15,6,300,1,'vegan','beginner');
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Three Mushroom Tagliatelle with garlic sauce','Calories: 300
+INGREDIENTS
+	•	75 g tagliatelle, dry
+	•	3/8 cup shiitake mushrooms
+	•	3/8 cup baby button mushrooms
+	•	3/8 cup chestnut mushrooms
+	•	1 tsp vegan margarine
+FOR THE SAUCE
+	•	1 tbsp flour/corn flour
+	•	1 tbsp vegan margarine
+	•	1 cup nondairy milk (I used rice milk)
+	•	1 fat garlic clove, crushed
+	•	a few tablespoons of the pasta cooking water
+	•	salt and pepper
+PREPARATION
+	1	Cook the pasta according to package instructions. Chop and slice the mushrooms.
+	2	Melt the margarine over medium heat. When the pan is hot, cook the mushrooms for a few minutes until they have slightly shrunk and browned on all sides. Set aside.
+	3	For the sauce, melt the margarine in a small saucepan, then add the (corn)flour to make a roux. Add the garlic. Gradually pour in the non-dairy milk and a few tablespoons of the pasta cooking water and whisk vigorously to combine all the ingredients. When the sauce starts to boil, lower the heat and keep whisking until the sauce starts to thicken, then take it off the heat.
+	4	Mix the sauce and the mushrooms in the tagliatelle. Serve immediately and enjoy.
+
+',15,6,300,1,'vegan','beginner');
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Three Mushroom Tagliatelle with garlic sauce','Calories: 300
+INGREDIENTS
+	•	75 g tagliatelle, dry
+	•	3/8 cup shiitake mushrooms
+	•	3/8 cup baby button mushrooms
+	•	3/8 cup chestnut mushrooms
+	•	1 tsp vegan margarine
+FOR THE SAUCE
+	•	1 tbsp flour/corn flour
+	•	1 tbsp vegan margarine
+	•	1 cup nondairy milk (I used rice milk)
+	•	1 fat garlic clove, crushed
+	•	a few tablespoons of the pasta cooking water
+	•	salt and pepper
+PREPARATION
+	1	Cook the pasta according to package instructions. Chop and slice the mushrooms.
+	2	Melt the margarine over medium heat. When the pan is hot, cook the mushrooms for a few minutes until they have slightly shrunk and browned on all sides. Set aside.
+	3	For the sauce, melt the margarine in a small saucepan, then add the (corn)flour to make a roux. Add the garlic. Gradually pour in the non-dairy milk and a few tablespoons of the pasta cooking water and whisk vigorously to combine all the ingredients. When the sauce starts to boil, lower the heat and keep whisking until the sauce starts to thicken, then take it off the heat.
+	4	Mix the sauce and the mushrooms in the tagliatelle. Serve immediately and enjoy.
+
+',18,6,300,1,'vegan','beginner');
+
+
+
+
+
+
+
+
+
+INGREDIENTS
+	•	75 g tagliatelle, dry
+	•	3/8 cup shiitake mushrooms
+	•	3/8 cup baby button mushrooms
+	•	3/8 cup chestnut mushrooms
+	•	1 tsp vegan margarine
+FOR THE SAUCE
+	•	1 tbsp flour/corn flour
+	•	1 tbsp vegan margarine
+	•	1 cup nondairy milk (I used rice milk)
+	•	1 fat garlic clove, crushed
+	•	a few tablespoons of the pasta cooking water
+	•	salt and pepper
+PREPARATION
+	1	Cook the pasta according to package instructions. Chop and slice the mushrooms.
+	2	Melt the margarine over medium heat. When the pan is hot, cook the mushrooms for a few minutes until they have slightly shrunk and browned on all sides. Set aside.
+	3	For the sauce, melt the margarine in a small saucepan, then add the (corn)flour to make a roux. Add the garlic. Gradually pour in the non-dairy milk and a few tablespoons of the pasta cooking water and whisk vigorously to combine all the ingredients. When the sauce starts to boil, lower the heat and keep whisking until the sauce starts to thicken, then take it off the heat.
+	4	Mix the sauce and the mushrooms in the tagliatelle. Serve immediately and enjoy.
+
+
+
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Apple Smoothie','Calories: 200
+
+INGREDIENTS:
+Apple
+Milk
+Almond
+yogurt ,honey.
+cinnamon
+Directions:
+	1	Peel and cut apple into halves. Remove the core and cut apple into large pieces.
+	2	Add apple and almonds in a blender jar.
+	3	Add milk, yogurt and honey.
+	4	Blend until smooth and there are no chunks of fruit. Pour prepared smoothie into a chilled serving glass and sprinkle cinnamon over it.
+
+
+',5,5,200,3,'vegetarian','beginner');
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Apple Smoothie','Calories: 200
+
+INGREDIENTS:
+Apple
+Milk
+Almond
+yogurt ,honey.
+cinnamon
+Directions:
+	1	Peel and cut apple into halves. Remove the core and cut apple into large pieces.
+	2	Add apple and almonds in a blender jar.
+	3	Add milk, yogurt and honey.
+	4	Blend until smooth and there are no chunks of fruit. Pour prepared smoothie into a chilled serving glass and sprinkle cinnamon over it.
+
+
+',21,5,200,3,'vegetarian','beginner');
+
+
+
+
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chinese Egg Fried Rice','Calories: 400
+
+Directions
+At least 1 day before you plan to make the fried rice, place the rinsed rice in a heavy, medium-sized saucepan. Add 2 cups of cold water and salt, to taste. Bring to a boil over high heat. Cover, and cook at a gentle boil until the water has cooked down to the level of the rice. With a spoon (not a fork), stir the rice well. Cover, and reduce the heat to low. Continue to cook for about 15 minutes, or until the rice is tender. Fluff with a fork. Cool to room temperature before covering and refrigerating for 24 hours.
+Break up any clumps of the cold rice with your fingers and set aside. In a small bowl, stir together the oyster sauce and soy sauce and set aside.
+Coat a large, nonstick skillet with nonstick vegetable spray and set over medium-high heat. When the skillet is hot, add the eggs, swirling them around to make sure they coat the whole bottom of the pan. Cook, without stirring, and adjusting the heat as necessary, until the eggs are firm and cooked through but not yet starting to brown, lifting the skillet and tilting it so that the eggs cook evenly. Slide the eggs onto a plate and when they have cooled, cut into small pieces and set aside.
+Return the skillet to the burner and heat the oil over high heat. When it is hot, add the peas and scallions, and cook, stirring constantly, until the scallions are limp, about 1 minute. Stir in the rice, sauce mixture, eggs and roast pork until well mixed. Continue to cook, stirring, until the rice is heated through, 1 to 2 minutes. Plate and drizzle with sesame oil, to taste.
+
+
+',4,3,400,4,'eggitarian','expert');
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chinese Egg Fried Rice','Calories: 400
+
+Directions
+At least 1 day before you plan to make the fried rice, place the rinsed rice in a heavy, medium-sized saucepan. Add 2 cups of cold water and salt, to taste. Bring to a boil over high heat. Cover, and cook at a gentle boil until the water has cooked down to the level of the rice. With a spoon (not a fork), stir the rice well. Cover, and reduce the heat to low. Continue to cook for about 15 minutes, or until the rice is tender. Fluff with a fork. Cool to room temperature before covering and refrigerating for 24 hours.
+Break up any clumps of the cold rice with your fingers and set aside. In a small bowl, stir together the oyster sauce and soy sauce and set aside.
+Coat a large, nonstick skillet with nonstick vegetable spray and set over medium-high heat. When the skillet is hot, add the eggs, swirling them around to make sure they coat the whole bottom of the pan. Cook, without stirring, and adjusting the heat as necessary, until the eggs are firm and cooked through but not yet starting to brown, lifting the skillet and tilting it so that the eggs cook evenly. Slide the eggs onto a plate and when they have cooled, cut into small pieces and set aside.
+Return the skillet to the burner and heat the oil over high heat. When it is hot, add the peas and scallions, and cook, stirring constantly, until the scallions are limp, about 1 minute. Stir in the rice, sauce mixture, eggs and roast pork until well mixed. Continue to cook, stirring, until the rice is heated through, 1 to 2 minutes. Plate and drizzle with sesame oil, to taste.
+
+
+',16,3,400,4,'eggitarian','expert');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chinese Egg Fried Rice','Calories: 400
+
+Directions
+At least 1 day before you plan to make the fried rice, place the rinsed rice in a heavy, medium-sized saucepan. Add 2 cups of cold water and salt, to taste. Bring to a boil over high heat. Cover, and cook at a gentle boil until the water has cooked down to the level of the rice. With a spoon (not a fork), stir the rice well. Cover, and reduce the heat to low. Continue to cook for about 15 minutes, or until the rice is tender. Fluff with a fork. Cool to room temperature before covering and refrigerating for 24 hours.
+Break up any clumps of the cold rice with your fingers and set aside. In a small bowl, stir together the oyster sauce and soy sauce and set aside.
+Coat a large, nonstick skillet with nonstick vegetable spray and set over medium-high heat. When the skillet is hot, add the eggs, swirling them around to make sure they coat the whole bottom of the pan. Cook, without stirring, and adjusting the heat as necessary, until the eggs are firm and cooked through but not yet starting to brown, lifting the skillet and tilting it so that the eggs cook evenly. Slide the eggs onto a plate and when they have cooled, cut into small pieces and set aside.
+Return the skillet to the burner and heat the oil over high heat. When it is hot, add the peas and scallions, and cook, stirring constantly, until the scallions are limp, about 1 minute. Stir in the rice, sauce mixture, eggs and roast pork until well mixed. Continue to cook, stirring, until the rice is heated through, 1 to 2 minutes. Plate and drizzle with sesame oil, to taste.
+
+
+',14,3,400,4,'eggitarian','expert');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chinese Egg Fried Rice','Calories: 400
+Directions
+At least 1 day before you plan to make the fried rice, place the rinsed rice in a heavy, medium-sized saucepan. Add 2 cups of cold water and salt, to taste. Bring to a boil over high heat. Cover, and cook at a gentle boil until the water has cooked down to the level of the rice. With a spoon (not a fork), stir the rice well. Cover, and reduce the heat to low. Continue to cook for about 15 minutes, or until the rice is tender. Fluff with a fork. Cool to room temperature before covering and refrigerating for 24 hours.
+Break up any clumps of the cold rice with your fingers and set aside. In a small bowl, stir together the oyster sauce and soy sauce and set aside.
+Coat a large, nonstick skillet with nonstick vegetable spray and set over medium-high heat. When the skillet is hot, add the eggs, swirling them around to make sure they coat the whole bottom of the pan. Cook, without stirring, and adjusting the heat as necessary, until the eggs are firm and cooked through but not yet starting to brown, lifting the skillet and tilting it so that the eggs cook evenly. Slide the eggs onto a plate and when they have cooled, cut into small pieces and set aside.
+Return the skillet to the burner and heat the oil over high heat. When it is hot, add the peas and scallions, and cook, stirring constantly, until the scallions are limp, about 1 minute. Stir in the rice, sauce mixture, eggs and roast pork until well mixed. Continue to cook, stirring, until the rice is heated through, 1 to 2 minutes. Plate and drizzle with sesame oil, to taste.
+
+
+
+',20,3,400,4,'eggitarian','expert');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chinese Egg Fried Rice','Calories: 400
+
+Directions
+At least 1 day before you plan to make the fried rice, place the rinsed rice in a heavy, medium-sized saucepan. Add 2 cups of cold water and salt, to taste. Bring to a boil over high heat. Cover, and cook at a gentle boil until the water has cooked down to the level of the rice. With a spoon (not a fork), stir the rice well. Cover, and reduce the heat to low. Continue to cook for about 15 minutes, or until the rice is tender. Fluff with a fork. Cool to room temperature before covering and refrigerating for 24 hours.
+Break up any clumps of the cold rice with your fingers and set aside. In a small bowl, stir together the oyster sauce and soy sauce and set aside.
+Coat a large, nonstick skillet with nonstick vegetable spray and set over medium-high heat. When the skillet is hot, add the eggs, swirling them around to make sure they coat the whole bottom of the pan. Cook, without stirring, and adjusting the heat as necessary, until the eggs are firm and cooked through but not yet starting to brown, lifting the skillet and tilting it so that the eggs cook evenly. Slide the eggs onto a plate and when they have cooled, cut into small pieces and set aside.
+Return the skillet to the burner and heat the oil over high heat. When it is hot, add the peas and scallions, and cook, stirring constantly, until the scallions are limp, about 1 minute. Stir in the rice, sauce mixture, eggs and roast pork until well mixed. Continue to cook, stirring, until the rice is heated through, 1 to 2 minutes. Plate and drizzle with sesame oil, to taste.
+
+',18,3,400,4,'eggitarian','expert');
+
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chinese Egg Fried Rice','Calories: 400
+
+Directions
+At least 1 day before you plan to make the fried rice, place the rinsed rice in a heavy, medium-sized saucepan. Add 2 cups of cold water and salt, to taste. Bring to a boil over high heat. Cover, and cook at a gentle boil until the water has cooked down to the level of the rice. With a spoon (not a fork), stir the rice well. Cover, and reduce the heat to low. Continue to cook for about 15 minutes, or until the rice is tender. Fluff with a fork. Cool to room temperature before covering and refrigerating for 24 hours.
+Break up any clumps of the cold rice with your fingers and set aside. In a small bowl, stir together the oyster sauce and soy sauce and set aside.
+Coat a large, nonstick skillet with nonstick vegetable spray and set over medium-high heat. When the skillet is hot, add the eggs, swirling them around to make sure they coat the whole bottom of the pan. Cook, without stirring, and adjusting the heat as necessary, until the eggs are firm and cooked through but not yet starting to brown, lifting the skillet and tilting it so that the eggs cook evenly. Slide the eggs onto a plate and when they have cooled, cut into small pieces and set aside.
+Return the skillet to the burner and heat the oil over high heat. When it is hot, add the peas and scallions, and cook, stirring constantly, until the scallions are limp, about 1 minute. Stir in the rice, sauce mixture, eggs and roast pork until well mixed. Continue to cook, stirring, until the rice is heated through, 1 to 2 minutes. Plate and drizzle with sesame oil, to taste.
+
+',9,3,400,1,'eggitarian','expert');
+
+
+insert into cheforacle.dish(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) values('Chinese Egg Fried Rice','Calories: 400
+
+Directions
+At least 1 day before you plan to make the fried rice, place the rinsed rice in a heavy, medium-sized saucepan. Add 2 cups of cold water and salt, to taste. Bring to a boil over high heat. Cover, and cook at a gentle boil until the water has cooked down to the level of the rice. With a spoon (not a fork), stir the rice well. Cover, and reduce the heat to low. Continue to cook for about 15 minutes, or until the rice is tender. Fluff with a fork. Cool to room temperature before covering and refrigerating for 24 hours.
+Break up any clumps of the cold rice with your fingers and set aside. In a small bowl, stir together the oyster sauce and soy sauce and set aside.
+Coat a large, nonstick skillet with nonstick vegetable spray and set over medium-high heat. When the skillet is hot, add the eggs, swirling them around to make sure they coat the whole bottom of the pan. Cook, without stirring, and adjusting the heat as necessary, until the eggs are firm and cooked through but not yet starting to brown, lifting the skillet and tilting it so that the eggs cook evenly. Slide the eggs onto a plate and when they have cooled, cut into small pieces and set aside.
+Return the skillet to the burner and heat the oil over high heat. When it is hot, add the peas and scallions, and cook, stirring constantly, until the scallions are limp, about 1 minute. Stir in the rice, sauce mixture, eggs and roast pork until well mixed. Continue to cook, stirring, until the rice is heated through, 1 to 2 minutes. Plate and drizzle with sesame oil, to taste.
+
+',8,3,400,1,'eggitarian','expert');
+
+
+
+
+
+
+
+
+create table cheforacle. has_ratings(rid SERIAL primary key,stars integer,did integer not null,foreign key(did) references cheforacle.dish(did));
+
+create table cheforacle.lookup_workout(wname varchar(128) primary key,calorie_per_min integer,instruction varchar(5000),calorie integer not null);
+
+create table cheforacle.calories(calorie integer primary key,range varchar(128) not null,wname varchar(128) not null,foreign key(wname) references cheforacle.lookup_workout(wname));
+
+
+create table cheforacle.comefrom_country(contype varchar(128),coname varchar(128) primary key,cid integer,foreign key(cid) references cheforacle.cusine(cid));
+
+create table cheforacle.selects(iid integer,cid integer,uname varchar(128),mid integer,primary key(iid,cid,uname),foreign key(iid) references cheforacle.ingredients(iid),foreign key(cid) references cheforacle.cusine(cid),foreign key(uname) references cheforacle.user_profile(uname),foreign key(mid) references cheforacle.meal(mid));
+
+
+
+
+
+
+insert into cheforacle.lookup_workout(wname, calorie_per_min, instruction, calorie) values ( 'walking', 4, 'To Burn 200  Calories Walk 3-4 Miles for 60 minutes',200);
+
+
+insert into cheforacle.lookup_workout (wname,calorie_per_min, instruction,calorie) values('swimming',7,'To Burn 400 Calories Swim for 60 minutes',400);
+
+
+insert into cheforacle.lookup_workout(wname,calorie_per_min,instruction,calorie)values('cycling',8,'To Burn 600 Calories Cycling for 80 minutes',600);
+
+
+insert into cheforacle.lookup_workout (wname,calorie_per_min, instruction, calorie) values('jogging',4,'To Burn 300 Calories jogg for 30 minutes',300);
+
+
+insert into cheforacle.lookup_workout (wname, calorie_per_min, instruction,calorie) values ('pushups',10,'To Burn 100 Calories jogg for 15 minutes',100);
+
+
+
+
+
+insert into cheforacle.calories(calorie,range,wname)values(200,200,'walking');
+insert into cheforacle.calories(calorie,range,wname)values(400,400
+,'swimming');
+insert into cheforacle.calories(calorie,range,wname)values(600,600,'cycling');
+insert into cheforacle.calories(calorie,range,wname)values(300,300
+,'jogging');
+insert into cheforacle.calories(calorie,range,wname)values(100,100,'pushups');
+
+
+
+
+ALTER TABLE cheforacle.dish ADD FOREIGN KEY(calorie) REFERENCES cheforacle.calories(calorie);
+
+
+
+
+
+
+
+insert into cheforacle.has_ratings(stars,did)values(4,1);
+insert into cheforacle.has_ratings(stars,did)values(5,7);
+insert into cheforacle.has_ratings(stars,did)values(3,11);
+insert into cheforacle.has_ratings(stars,did)values(4,18);
+insert into cheforacle.has_ratings(stars,did)values(4,22);
+
+
+
+
+insert into cheforacle.has_ratings(stars,did)values(4,2);
+insert into cheforacle.has_ratings(stars,did)values(4,3);
+insert into cheforacle.has_ratings(stars,did)values(4,4);
+insert into cheforacle.has_ratings(stars,did)values(4,5);
+
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('French Omelet','Calories: 200
+Combine the eggs, milk, salt, and pepper in a medium bowl and mix very well with a fork or a whisk.
+Set a plate by the stove. Heat a small (about 6 inches) seasoned omelet pan or non-stick skillet over medium-high heat. When the pan is warm, add the butter (it should sizzle gently). Swirl the pan to distribute the butter as it melts. When the butter stops sizzling and the foam subsides add the eggs. Pause to let the eggs heat slightly and then stir vigorously, with a heatproof spatula, making sure you include the sides of the egg mixture occasionally so the omelet cooks evenly. Once the eggs are just set, bang the pan gently on the burner to release the omelet from the pan. Check to see that it is not sticking to the sides or bottom of the pan, if so release the omelet with a heat proof spatula. Hold the pan at a 45-degree angle to the stove and carefully fold the omelet like a business letter. Cook just until the desired degree of doneness lifting the pan or reducing the heat to prevent browning. (A classic omelet doesn't have any browning on it.) Transfer to a warm plate and serve.
+Omelet Filling Suggestions: There are many omelet fillings, both raw and cooked, sweet and savory. Here is a starting point, but feel free to improvise. Once the eggs are set add any of these ingredients before folding. An alternative method, to use with delicate fillings, like creme fraiche and herbs, fresh fruits or caviar
+- 1 tablespoon finely chopped fresh herbs, like Italian parsley, basil, dill, tarragon, chives, thyme, and chervil. Use the herbs alone or in combination, like the classic combination fine herbs (equal parts parsley, chervil, chives and tarragon.) Brush the finished omelet with butter and sprinkle with additional herbs. Herbs can also be added to the omelet mixture to flavor the eggs more fully. - 2 to 3 tablespoons cooked vegetables like, chopped asparagus, spinach or other greens, zucchini, mushrooms, eggplant or peppers - 2 tablespoons diced fresh tomato or avocado - 2 tablespoons grated cheese, like Gruyere, Goat cheese, Cheddar, Monterey Jack, Gouda, Feta - 1 tablespoon currant jelly, then dust omelet with confectioner's sugar - 2 tablespoons chopped proscuitto or other ham, crumbled cooked bacon or other cured meat - 1 to 2 tablespoons chopped smoked salmon or trout, with a tablespoon sour cream, cream cheese or creme fraiche - 1 tablespoon honey with 1 tablespoon ricotta cheese - 2 to 3 tablespoons sliced apples, pears or strawberries, alone or with a complimentary cheese.
+
+',21,6,400,1,'eggitarian','beginner');
+
+
+
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Vegetable Stir-Fry','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',1,5,400,2,'vegitarian','beginner');
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Vegetable Stir-Fry','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',2,5,400,2,'vegitarian','beginner');
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Vegetable Stir-Fry','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',3,5,400,2,'vegitarian','beginner');
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Vegetable Stir-Fry','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',4,5,400,2,'vegitarian','beginner');
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Vegetable Stir-Fry','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',16,5,400,2,'vegitarian','beginner');
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Vegetable Stir-Fry','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',18,5,400,2,'vegitarian','beginner');
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Vegetable Stir-Fry','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',19,5,400,2,'vegitarian','beginner');
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Vegetable Stir-Fry','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',20,5,400,2,'vegitarian','beginner');
+
+
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Tuna Sandwich','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, onion,tomato,mushroom,eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',1,6,400,5,'non-vegitarian','intermediate');
+
+
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Tuna Sandwich','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, onion,tomato,mushroom,eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',2,6,400,5,'non-vegitarian','intermediate');
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Tuna Sandwich','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, onion,tomato,mushroom,eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',3,6,400,5,'non-vegitarian','intermediate');
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Tuna Sandwich','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, onion,tomato,mushroom,eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',4,6,400,5,'non-vegitarian','intermediate');
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Tuna Sandwich','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, onion,tomato,mushroom,eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',10,6,400,5,'non-vegitarian','intermediate');
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Tuna Sandwich','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, onion,tomato,mushroom,eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',11,6,400,5,'non-vegitarian','intermediate');
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Tuna Sandwich','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, onion,tomato,mushroom,eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',1,6,400,5,'non-vegitarian','intermediate');
+insert into cheforacle.dish
+(dname,ddirections,iid,cid,calorie,mid,fpref,cpref) 
+values('Tuna Sandwich','Calories: 400
+Start by preparing and cutting all the vegetables and measuring your ingredients so that they are ready to go. Once you begin stir-frying, it goes very quickly.
+In a wok or large skillet, heat canola oil over high heat until almost smoking. Add the peppers and onion while stirring constantly. While continuing to stir, add successively the squash, broccoli, onion,tomato,mushroom,eggplant, tofu, garlic, and teriyaki sauce. Cook, stirring, constantly for 2 minutes. Add the bok choy, sprouts, pepper, and salt and cook, stirring, until crisp-tender, about 2 minutes more.
+Stir in snow peas and sesame oil and remove from heat. Serve immediately.
+Recipe courtesy of George Stella',20,6,400,5,'non-vegitarian','intermediate');
+
+
+
+
+
+
+
+******************
+INSERT INTO `cheforacle`.`ingredients` (`inname`, `intype`) VALUES ('Garlic sauce', 'sauces');
+INSERT INTO `cheforacle`.`ingredients` (`inname`, `intype`) VALUES ('Mayonnaise', 'sauces');
+INSERT INTO `cheforacle`.`ingredients` (`inname`, `intype`) VALUES ('Barbeque', 'sauces');
+INSERT INTO `cheforacle`.`ingredients` (`inname`, `intype`) VALUES ('Milk', 'sauces');
+
+
+
+
+
+INSERT INTO `cheforacle`.`calories` (`calorie`, `range`, `wname`) VALUES ('200', '200-300', 'swimming');
+INSERT INTO `cheforacle`.`calories` (`calorie`, `range`, `wname`) VALUES ('400', '300-400', 'weight lifting');
+INSERT INTO `cheforacle`.`calories` (`calorie`, `range`, `wname`) VALUES ('600', '500-600', 'Running');
+
+
+
+
